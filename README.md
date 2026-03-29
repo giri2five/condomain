@@ -2,7 +2,7 @@
 
 **your wallet's condom.**
 
-A Chrome extension that protects you from wallet phishing, drainer attacks, and malicious dApps by giving every site its own disposable proxy wallet — your real wallet never connects to anything.
+A Chrome extension that protects you from wallet phishing, drainer attacks, and malicious dApps by giving every site its own disposable proxy wallet. Your real wallet never connects to anything.
 
 ---
 
