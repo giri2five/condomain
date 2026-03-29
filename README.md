@@ -10,7 +10,7 @@ A Chrome extension that protects you from wallet phishing, drainer attacks, and 
 
 Instead of exposing your real wallet to every dApp you visit, condom@in generates a fresh empty keypair for each site. When a dApp asks to connect, it gets the proxy. When it asks you to sign something, the proxy signs. Your real wallet address is never revealed, never signs anything, never at risk.
 
-If a site tries to drain you with a Permit signature, a Seaport order, or a MetaTransaction — the signature is worthless. It came from an empty proxy wallet with nothing in it.
+If a site tries to drain you with a Permit signature, a Seaport order, or a MetaTransaction, the signature is worthless. It came from an empty proxy wallet with nothing in it.
 
 ## What's protected
 
@@ -24,11 +24,11 @@ If a site tries to drain you with a Permit signature, a Seaport order, or a Meta
 
 ## Features
 
-- Per-site proxy wallet — every dApp gets a different address
+- Per-site proxy wallet - every dApp gets a different address
 - Blocks Permit / Permit2 drain signatures
 - Blocks Seaport NFT order drains
 - Blocks MetaTransaction forwarding attacks
-- Intercepts wallet_requestPermissions — no real MetaMask popup
+- Intercepts wallet_requestPermissions - no real MetaMask popup
 - Threat detection with Chrome notifications and badge flash
 - One-click proxy rotation per site
 - Full activity log with threat classification
