@@ -42,4 +42,4 @@ No browser extension can guarantee total protection against all wallet loss scen
 
 ## Contact
 
-Before publishing, replace this section with the project’s public support email or website contact.
+giri2k2five@gmail.com
