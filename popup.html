@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="color-scheme" content="light dark"/>
+<title>condom@in</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+button{-webkit-appearance:none;appearance:none;cursor:pointer;font-family:inherit;outline:none;border:none}
+:root{
+  --bg:#F6F1E9;--srf:#FFFFFF;--srf2:#EDE7DC;
+  --txt:#1A1614;--muted:#8C8882;--faint:#C0B8AE;
+  --brd:rgba(26,22,20,.07);
+  --navy:#1A3D5C;--coral-at:#E31837;
+  --tgl-skin:#F0D9C6;--prx-bg:#EDE7DC;--prx-txt:#6C6460;
+  --p:'Poppins',ui-rounded,-apple-system,sans-serif;
+}
+@media(prefers-color-scheme:dark){:root{
+  --bg:#22201C;--srf:#2C2924;--srf2:#363028;
+  --txt:#F5F0E8;--muted:#B0A898;--faint:#7A7068;
+  --brd:rgba(245,240,232,.1);
+  --navy:#4A90C8;--coral-at:#FF4D5A;
+  --tgl-skin:#4A3828;--prx-bg:#363028;--prx-txt:#C0B0A0;
+}}
+html,body{width:360px;background:var(--bg);color:var(--txt);font-family:var(--p);font-size:13px}
+body{min-height:480px;max-height:600px;display:flex;flex-direction:column;overflow:hidden}
+.popup{background:var(--bg);border-radius:16px;margin:5px;overflow:hidden;border:1px solid var(--brd);display:flex;flex-direction:column;flex:1;position:relative}
+.hdr{display:flex;align-items:center;justify-content:space-between;padding:14px 16px 11px;background:var(--srf);border-bottom:1px solid var(--brd)}
+.brand{display:flex;align-items:center;gap:9px}
+.bmark{width:27px;height:27px;border-radius:8px;background:var(--navy);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.bmark svg{width:15px;height:15px}
+.bname{font-style:italic;font-weight:800;font-size:14px;color:var(--navy);letter-spacing:-.01em}
+.bname .at{color:var(--coral-at)}
+.badge{font-size:10px;font-weight:700;padding:5px 12px;border-radius:20px;transition:all .4s;letter-spacing:.04em}
+.badge.on{background:var(--navy);color:#fff}
+.badge.off{background:rgba(227,24,55,.12);color:#C0132A;border:1px solid rgba(227,24,55,.25)}
+.hero{background:var(--srf);padding:17px 16px 14px;text-align:center;border-bottom:1px solid var(--brd)}
+.mascot-area{width:86px;height:104px;margin:0 auto 13px;position:relative}
+.mglow{position:absolute;inset:-12px;border-radius:50%;pointer-events:none;transition:background .5s}
+.mascot-area svg{position:relative;z-index:1;animation:bob 3.2s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+@keyframes blink{0%,88%,100%{transform:scaleY(1)}93%{transform:scaleY(.1)}}
+.p-l{animation:blink 5s ease-in-out infinite;transform-origin:32.5px 43px}
+.p-r{animation:blink 5s ease-in-out infinite .12s;transform-origin:58.5px 43px}
+.htitle{font-style:italic;font-weight:700;font-size:18px;color:var(--txt);margin-bottom:5px;line-height:1.25;transition:opacity .25s}
+.hsub{font-size:12px;color:var(--muted);line-height:1.6;font-weight:600;transition:opacity .25s}
+.tgl-sec{background:var(--srf);padding:4px 16px 15px;border-bottom:1px solid var(--brd)}
+.tgl-labels{display:flex;justify-content:space-between;margin-bottom:8px}
+.tl{font-size:10px;font-weight:700;letter-spacing:.1em;color:var(--faint);transition:color .3s}
+.tl.act{color:var(--txt)}
+.ttrack{width:100%;height:58px;border-radius:15px;background:var(--tgl-skin);position:relative;overflow:hidden;padding:0;cursor:pointer}
+.ttrack:focus-visible{box-shadow:0 0 0 3px rgba(26,61,92,.22)}
+.latex{position:absolute;inset:0;background:var(--navy);border-radius:inherit;transform-origin:left;transform:scaleX(0);transition:transform .6s cubic-bezier(.4,0,.15,1);pointer-events:none}
+.latex::after{content:'';position:absolute;right:-18px;top:-4px;bottom:-4px;width:36px;border-radius:50%;background:var(--navy);box-shadow:inset -6px 0 14px rgba(0,0,0,.28),inset 3px 0 6px rgba(255,255,255,.08)}
+.ttrack.on .latex{transform:scaleX(1)}
+.ttrack.on .latex::after{display:none}
+.tthumb{position:absolute;top:5px;left:5px;bottom:5px;width:calc(50% - 7px);background:var(--srf);border-radius:11px;box-shadow:0 2px 12px rgba(0,0,0,.14);display:flex;align-items:center;justify-content:center;transition:transform .55s cubic-bezier(.34,1.5,.64,1);z-index:2;pointer-events:none}
+.ttrack.on .tthumb{transform:translateX(calc(100% + 4px));box-shadow:0 2px 16px rgba(26,61,92,.2)}
+.tlbl{font-size:12px;font-weight:700;color:var(--faint);transition:color .3s}
+.ttrack.on .tlbl{color:var(--navy)}
+.stats{display:grid;grid-template-columns:1fr 1fr 1fr;background:var(--srf);border-bottom:1px solid var(--brd)}
+.stat{padding:12px 5px 10px;text-align:center;border-right:1px solid var(--brd)}
+.stat:last-child{border-right:none}
+.sv{font-size:22px;font-weight:700;line-height:1;margin-bottom:3px;color:var(--txt)}
+.sv.n{color:var(--navy)}.sv.r{color:var(--coral-at)}
+.sl{font-size:9px;color:var(--faint);font-weight:700;letter-spacing:.03em}
+.prx{background:var(--srf);padding:12px 16px;border-bottom:1px solid var(--brd)}
+.plbl{font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin-bottom:7px}
+.pcard{background:var(--prx-bg);border-radius:11px;padding:9px 12px;display:flex;align-items:center;gap:8px;border:1px solid var(--brd)}
+.paddr{font-size:11px;color:var(--prx-txt);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:700}
+.paddr .hi{color:var(--navy)}
+.paddr.mt{color:var(--faint);font-style:italic;font-weight:400}
+.pcopy{font-size:11px;font-weight:700;padding:7px 14px;border-radius:8px;background:#0A7CC1;color:#fff;flex-shrink:0;transition:all .15s}
+.pcopy:hover{background:#085E93}
+.force-btn{font-size:11px;font-weight:700;padding:7px 14px;border-radius:8px;background:#1A3D5C;color:#fff;flex-shrink:0;transition:all .15s}
+.force-btn:hover{background:#132D42}
+.force-btn.loading{opacity:.75}
+.force-btn.done{background:#1BA835}
+.chains{background:var(--srf);display:flex;align-items:center;gap:5px;padding:9px 16px;border-bottom:1px solid var(--brd);overflow-x:auto;scrollbar-width:none}
+.chains::-webkit-scrollbar{display:none}
+.clbl{font-size:9px;color:var(--faint);font-weight:700;flex-shrink:0}
+.cp{font-size:9px;font-weight:700;padding:3px 9px;border-radius:20px;border:1px solid;white-space:nowrap;flex-shrink:0}
+.cp-evm{color:#3B5EA6;border-color:rgba(59,94,166,.25);background:rgba(59,94,166,.1)}
+.cp-sol{color:#7C3AED;border-color:rgba(124,58,237,.25);background:rgba(124,58,237,.1)}
+.cp-sui{color:#0284C7;border-color:rgba(2,132,199,.25);background:rgba(2,132,199,.1)}
+.cp-apt{color:#047857;border-color:rgba(4,120,87,.25);background:rgba(4,120,87,.1)}
+.cp-trx{color:#DC2626;border-color:rgba(220,38,38,.25);background:rgba(220,38,38,.1)}
+.cp.dim{opacity:.3}
+.ftr{background:var(--srf);display:flex;gap:8px;padding:11px 16px 14px}
+.fbtn{font-size:12px;font-weight:700;flex:1;padding:11px 0;text-align:center;border-radius:10px;transition:all .15s;letter-spacing:.02em;cursor:pointer}
+.fbtn-hist{background:#00337C;color:#fff}
+.fbtn-hist:hover{background:#002460}
+.fbtn-swap{background:#005EB8;color:#fff}
+.fbtn-swap:hover{background:#004A90}
+.sheet{display:none;position:absolute;inset:0;background:var(--bg);border-radius:16px;z-index:40;flex-direction:column;overflow:hidden}
+.sheet.show{display:flex}
+.sheet-hdr{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid var(--brd);flex-shrink:0;background:var(--srf)}
+.sheet-title{font-style:italic;font-weight:700;font-size:15px;color:var(--navy)}
+.sclose{font-size:13px;font-weight:700;color:#fff;background:#1A1614;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:all .15s;box-shadow:0 2px 8px rgba(0,0,0,.18);cursor:pointer}
+.sclose:hover{transform:rotate(90deg);background:#000}
+.sheet-body{flex:1;overflow-y:auto;padding:6px 16px 12px}
+.sheet-sec{padding:10px 0 4px}
+.sheet-sub{font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);margin-bottom:8px}
+.si{padding:12px 0;border-bottom:1px solid rgba(26,22,20,.05);display:flex;align-items:center;gap:12px}
+.si:last-child{border-bottom:none}
+.si-icon{width:36px;height:36px;border-radius:10px;background:var(--srf2);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:var(--navy);flex-shrink:0;border:1px solid var(--brd)}
+.si-body{flex:1;min-width:0}
+.si-name{font-size:12px;font-weight:700;color:var(--txt);margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.si-addr{font-size:10px;color:var(--faint);font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.si-tags{display:flex;gap:4px;margin-top:5px}
+.si-ch{font-size:8px;font-weight:700;padding:2px 7px;border-radius:10px;color:#3B5EA6;background:rgba(59,94,166,.1);text-transform:uppercase}
+.si-ch.sol{color:#7C3AED;background:rgba(124,58,237,.1)}
+.si-threat{font-size:8px;font-weight:700;padding:2px 7px;border-radius:10px;color:#E31837;background:rgba(227,24,55,.1);text-transform:uppercase}
+.si-right{display:flex;flex-direction:column;align-items:flex-end;gap:6px;flex-shrink:0}
+.si-cv{font-size:16px;font-weight:700;color:var(--navy);line-height:1}
+.si-cl{font-size:8px;color:var(--faint);font-weight:600;text-transform:uppercase}
+.si-rot{font-size:10px;font-weight:700;padding:5px 11px;border-radius:7px;background:#005EB8;color:#fff;transition:all .15s;cursor:pointer}
+.si-rot:hover{background:#004A90}
+.empty{text-align:center;padding:32px 0;color:var(--faint);font-size:12px;line-height:2.2}
+.log{padding:10px 12px;border-radius:12px;border:1px solid var(--brd);background:var(--srf);margin-bottom:8px}
+.log:last-child{margin-bottom:0}
+.log.danger{background:rgba(227,24,55,.1);border-color:rgba(227,24,55,.22)}
+.log.warn{background:rgba(255,181,84,.12);border-color:rgba(255,181,84,.28)}
+.log-title{font-size:11px;font-weight:700;color:var(--txt);line-height:1.45}
+.log-meta{margin-top:4px;font-size:9px;color:var(--muted);font-weight:600;letter-spacing:.02em}
+.sheet-ftr{padding:11px 16px 15px;border-top:1px solid var(--brd);flex-shrink:0;background:var(--srf)}
+.rot-all{width:100%;padding:12px;border-radius:10px;background:#00337C;color:#fff;font-size:12px;font-weight:700;letter-spacing:.03em;transition:all .15s;cursor:pointer}
+.rot-all:hover{background:#002460}
+</style>
+</head>
+<body>
+<div class="popup" id="mainPopup">
+  <div class="hdr">
+    <div class="brand">
+      <div class="bmark"><svg viewBox="0 0 15 18" fill="none"><ellipse cx="7.5" cy="5.5" rx="4.5" ry="5.5" fill="#fff"/><rect x="3" y="5" width="9" height="10" fill="#fff"/><rect x="1" y="13.5" width="13" height="4" rx="2" fill="rgba(255,255,255,.55)"/></svg></div>
+      <span class="bname">condom<span class="at">@</span>in</span>
+    </div>
+    <span class="badge on" id="badge">wrapped</span>
+  </div>
+  <div class="hero">
+    <div class="mascot-area">
+      <div class="mglow" id="mglow"></div>
+      <svg viewBox="0 0 88 108" width="86" height="104">
+        <path d="M24,32 Q24,6 44,6 Q64,6 64,32 L64,72 L24,72 Z" fill="#1A3D5C" id="cbody"/>
+        <ellipse cx="44" cy="13" rx="6.5" ry="8" fill="#2A5078" id="ctip" opacity=".7"/>
+        <rect x="26" y="18" width="5" height="52" rx="2.5" fill="rgba(255,255,255,.1)"/>
+        <rect x="14" y="68" width="60" height="22" rx="11" fill="#132D42" id="crim"/>
+        <rect x="20" y="68" width="48" height="9" fill="#1A3D5C" id="cblend"/>
+        <circle cx="31" cy="43" r="9.5" fill="#fff"/><circle cx="57" cy="43" r="9.5" fill="#fff"/>
+        <circle cx="32.5" cy="43" r="5.5" fill="#1A1614" id="pupL" class="p-l"/>
+        <circle cx="58.5" cy="43" r="5.5" fill="#1A1614" id="pupR" class="p-r"/>
+        <circle cx="34.5" cy="41" r="2" fill="#fff"/><circle cx="60.5" cy="41" r="2" fill="#fff"/>
+        <path d="M29,58 Q44,68 59,58" stroke="#1A1614" stroke-width="2.5" stroke-linecap="round" fill="none" id="mth"/>
+      </svg>
+    </div>
+    <div class="htitle" id="htitle">your wallet is covered.</div>
+    <div class="hsub" id="hsub">sites get the proxy. you keep everything.</div>
+  </div>
+  <div class="tgl-sec">
+    <div class="tgl-labels"><span class="tl" id="lOff">off</span><span class="tl act" id="lOn">on</span></div>
+    <button class="ttrack on" id="ttrack" aria-label="toggle protection">
+      <div class="latex"></div>
+      <div class="tthumb"><span class="tlbl" id="tlbl">protected</span></div>
+    </button>
+  </div>
+  <div class="stats">
+    <div class="stat"><div class="sv n" id="stSites">—</div><div class="sl">sites wrapped</div></div>
+    <div class="stat"><div class="sv" id="stSigs">—</div><div class="sl">sigs handled</div></div>
+    <div class="stat"><div class="sv" id="stThreats">—</div><div class="sl">threats blocked</div></div>
+  </div>
+  <div class="prx">
+    <div class="plbl" id="plbl">this site's proxy</div>
+    <div class="pcard">
+      <div class="paddr mt" id="proxyAddr">connect to a dapp to activate</div>
+      <button class="pcopy" id="copyBtn" style="display:none">copy</button>
+      <button class="force-btn" id="forceBtn">connect</button>
+    </div>
+  </div>
+  <div class="chains" id="chainsBar">
+    <span class="clbl">active:</span>
+    <span class="cp cp-evm dim" id="cp-evm">EVM</span>
+    <span class="cp cp-sol dim" id="cp-sol">Solana</span>
+    <span class="cp cp-sui dim" id="cp-sui">Sui</span>
+    <span class="cp cp-apt dim" id="cp-apt">Aptos</span>
+    <span class="cp cp-trx dim" id="cp-trx">TRON</span>
+  </div>
+  <div class="ftr">
+    <button class="fbtn fbtn-hist" id="histBtn">hookup history</button>
+    <button class="fbtn fbtn-swap" id="swapBtn">swap condom</button>
+  </div>
+  <div class="sheet" id="sheet">
+    <div class="sheet-hdr">
+      <span class="sheet-title">hookup history</span>
+      <button class="sclose" id="sheetClose">✕</button>
+    </div>
+    <div class="sheet-body">
+      <div class="sheet-sec">
+        <div class="sheet-sub">Sites</div>
+        <div id="sitesList"></div>
+      </div>
+      <div class="sheet-sec">
+        <div class="sheet-sub">Threat log</div>
+        <div id="activityLog"></div>
+      </div>
+    </div>
+    <div class="sheet-ftr">
+      <button class="rot-all" id="rotAllBtn">rotate all proxies</button>
+    </div>
+  </div>
+</div>
+<script src="popup.js"></script>
+</body>
+</html>
